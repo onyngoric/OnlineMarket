@@ -46,5 +46,5 @@ class AdImageForm(forms.ModelForm):
     model = AdImages
     fields =['media']
     widgets = {
-          'media': ClearableFileInput(attrs={'multiple': True}),
+          'media': ClearableFileInput(attrs={'allow_multiple_selected': True}),
       }
