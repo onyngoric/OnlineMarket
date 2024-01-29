@@ -1446,6 +1446,55 @@ def home2(request):
         return redirect('login') 
        
        
+def hiw(request):
+    if request.user.is_authenticated:
+        username=request.session['trio_User']
+        return render(request, 'hiw.html', {'username':username})
+    else:
+        return render(request, 'hiw.html')
+
+def terms(request):
+    if request.user.is_authenticated:
+        username=request.session['trio_User']
+        return render(request, 'terms.html', {'username':username})
+    else:
+        return render(request, 'terms.html')
+    
+def privacy(request):
+    if request.user.is_authenticated:
+        username=request.session['trio_User']
+        return render(request, 'privacy.html', {'username':username})
+    else:
+        return render(request, 'privacy.html')
+
+def cookie(request):
+    if request.user.is_authenticated:
+        username=request.session['trio_User']
+        return render(request, 'cookie.html', {'username':username})
+    else:
+        return render(request, 'cookie.html')
+
+def disclaimer(request):
+    if request.user.is_authenticated:
+        username=request.session['trio_User']
+        return render(request, 'disclaimer.html', {'username':username})
+    else:
+        return render(request, 'disclaimer.html')
+
+def faq(request):
+    if request.user.is_authenticated:
+        username=request.session['trio_User']
+        return render(request, 'faq.html', {'username':username})
+    else:
+        return render(request, 'faq.html')
+
+def ad(request):
+    if request.user.is_authenticated:
+        username=request.session['trio_User']
+        return render(request, 'ad.html', {'username':username})
+    else:
+        return render(request, 'ad.html')
+
 def view(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
