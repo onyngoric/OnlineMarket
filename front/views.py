@@ -11,6 +11,10 @@ from .models import *
 
 def home(request):
         if request.method == 'POST':
+            if request.POST.get('search'):
+                search = request.POST.get('search')
+                ad=Ad.objects.filter(title__icontains=search).prefetch_related('adimages_set').all()
+                return render(request, 'view.html', {'ad':ad})
             if request.POST.get('3D1'):
                 ad = Ad.objects.filter(category='3D Printing Technology').prefetch_related('adimages_set').all()
                 return render(request, 'view.html',{'ad':ad})
@@ -631,6 +635,11 @@ def home(request):
 def home2(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
+            if request.POST.get('search'):
+                search = request.POST.get('search')
+                ad=Ad.objects.filter(title__icontains=search).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html', {'ad':ad,'username':username})
             if request.POST.get('3D1'):
                 ad = Ad.objects.filter(category='3D Printing Technology').prefetch_related('adimages_set').all()
                 username=request.session['trio_User']
@@ -1502,7 +1511,7 @@ def view(request):
                 ad_id=request.POST.get('ad_id')
                 ad_categ=request.POST.get('ad_categ')
                 ads = Ad.objects.filter(id=ad_id).prefetch_related('adimages_set').all()
-                related = Ad.objects.filter(category=ad_categ).prefetch_related('adimages_set').all()
+                related = Ad.objects.filter(category=ad_categ).prefetch_related('adimages_set').all().exclude(id=ad_id)
                 username=request.session['trio_User']
                 return render(request, 'detail_view.html',{'username':username,'ads':ads,'related':related})
         else:
