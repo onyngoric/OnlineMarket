@@ -18,6 +18,7 @@ urlpatterns =[
     path('disclaimer', views.disclaimer, name='disclaimer'),
     path('faq', views.faq, name='faq'),
     path('ad', views.ad, name='ad'),
+    path('chat', views.chat, name='chat'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

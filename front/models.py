@@ -40,7 +40,6 @@ class Ad(models.Model):
     DELIVERY_OPTIONS=[
         ("willing to drop off","willing to drop off"),
         ("willing to ship Item","willing to ship Item"),
-        ("Offer curbside Pickup","Offer curbside Pickup"),
     ]
     delivery=models.CharField(max_length=50,choices=DELIVERY_OPTIONS,null=True)    
     LOCATION_OPTIONS = [
@@ -61,13 +60,12 @@ class Ad(models.Model):
     location=models.CharField(max_length=50,choices=LOCATION_OPTIONS)
     price=models.IntegerField(null=True)
     PAYMENT_OPTIONS=[
-        ('cash','cash'),
-        ('Cashless','cashless'),
-        ('Cash or Cashless','cash or cashless'),
+        ("cash","cash"),
+        ("E-Transfer","E-Transfer"),
+        ("Cash & E-Transfer","Cash & E-Transfer"),
     ]
     payment=models.CharField(max_length=50,choices=PAYMENT_OPTIONS,null=True)
-    email=models.EmailField(max_length=200)
-    phone=models.CharField(max_length=20,null=True)
+    email=models.EmailField(max_length=200,null=True)
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     
     class Meta:
@@ -79,3 +77,12 @@ class AdImages(models.Model):
     
     class Meta:
         verbose_name_plural = "AdImages"
+
+class AdMessage(models.Model):
+    adId=models.CharField(max_length=200000000000000000000000000)
+    poster=models.CharField(max_length=50)
+    message=models.CharField(max_length=500)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
+    
+    class Meta:
+        verbose_name_plural = "AdMessages"

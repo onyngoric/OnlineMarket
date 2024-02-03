@@ -1514,6 +1514,14 @@ def view(request):
                 related = Ad.objects.filter(category=ad_categ).prefetch_related('adimages_set').all().exclude(id=ad_id)
                 username=request.session['trio_User']
                 return render(request, 'detail_view.html',{'username':username,'ads':ads,'related':related})
+            elif request.POST.get('chat'):
+                ad_id=request.POST.get('ad_id')
+                user_id=request.user.username
+                ad=Ad.objects.filter(id=ad_id).all()
+                chats = AdMessage.objects.filter(adId=ad_id).all()
+                username=request.session['trio_User']
+                return render(request, 'chats.html', {'username':username, 'chats':chats, 'user_id':user_id, 'ad_id':ad_id, 'ad':ad})
+                
         else:
             username=request.session['trio_User']
             return render(request, 'view.html',{'username':username})
@@ -1603,7 +1611,8 @@ def activepost(request):
                 return render(request, 'post.html',{'form1':form1,'form2':form2})
         else:
             username=request.session['trio_User']
-            return render(request, 'post.html',{'form1':form1,'form2':form2,'username':username})
+            email =request.user.email
+            return render(request, 'post.html',{'form1':form1,'form2':form2,'username':username, 'email':email})
     else:
         messages.warning(request,"Login Required")
         return redirect('login')
@@ -1619,7 +1628,30 @@ def dashboard(request):
     else:
         messages.warning(request,"Login Required")
         return redirect('login')
-    
+
+def chat(request):
+    if request.user.is_authenticated:
+        username=request.session['trio_User']
+        if request.method == 'POST':
+            adid=request.POST.get('adid')
+            userid=request.POST.get('userid')
+            name=User.objects.filter(username=userid).values_list('first_name', flat=True)[0]
+            message=request.POST.get('message')
+            mssg=AdMessage(adId=adid, poster=name, message=message)
+            mssg.save()            
+            request.session['adid']=adid
+            request.session['userid']=userid
+            return redirect('chat')
+        else:
+            userid=request.session['userid']
+            adid=request.session['adid']
+            ad=Ad.objects.filter(id=adid).all()
+            chats = AdMessage.objects.filter(adId=adid).all()
+            return render(request, 'chats.html', {'username':username, 'chats':chats, 'user_id':userid, 'ad_id':adid, 'ad':ad})
+    else:
+        messages.warning(request,"Login Required")
+        return redirect('login')
+
 def logout_view(request):
     logout(request)
     messages.success(request,"Successfuly logged out")

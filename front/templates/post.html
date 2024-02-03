@@ -169,8 +169,8 @@
                 <!--Images Input-->
                 <div>
                   <div class="mb-4 d-flex justify-content-center" style="font-size: 13px !important;">
-                    <p>Add Images to attract more traffic to your Ad.</p>
-                    <p> Add upto <span class="badge rounded-pill badge-success"> 5 </span> Images</p>
+                    <p>Add an Image to attract more traffic to your Ad.</p>
+                    <!--<p> Add upto <span class="badge rounded-pill badge-success"> 5 </span> Images</p>-->
                   </div>
                   <div class="mb-4 d-flex justify-content-center">                    
                       <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
@@ -209,18 +209,8 @@
                   <label class="form-label" for="form6Example8">{{ form1.payment.label }}</label>
                   {{ form1.payment }}
                 </div>
-                <!--Section 7-->
-                <br>
-                <p><span class="badge rounded-pill badge-primary">7.</span>Contact Information</p>
-                <hr>
-                <br>
                 <div class="form-outline mb-4">
-                  <label class="form-label" for="form6Example9">{{ form1.email.label }}<span class="badge rounded-pill badge-danger">*</span></label> <!--dropdown list-->
-                  {{ form1.email}}
-                </div>
-                <div class="form-outline mb-4">
-                  <label class="form-label" for="form6Example10">{{ form1.phone.label }}</label> <!--dropdown list-->
-                  {{ form1.phone }}
+                  <input type="hidden" name="email" value="{{ email }}">
                 </div>
                 
               

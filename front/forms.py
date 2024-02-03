@@ -13,10 +13,8 @@ class AdForm(forms.ModelForm):
             "description":"Description:",
             "delivery":"PickUp (Optional):",
             "location":"Select Your Location:",
-            "price":"Name Your Price($)",
+            "price":"Price($) of Item:",
             "payment":"Select payment method:",
-            "email":"E-Mail:",
-            "phone":"Phone No. (Optional)",
         }
         widgets = {
           'description': forms.Textarea(attrs={'class': 'decribeit'}),
@@ -26,8 +24,6 @@ class AdForm(forms.ModelForm):
           'delivery': forms.Select(attrs={'class':'inbox'}),
           'title': forms.TextInput(attrs={'class':'inbox'}),
           'location': forms.Select(attrs={'class':'inbox'}),
-          'email': forms.TextInput(attrs={'class':'inbox'}),
-          'phone': forms.TextInput(attrs={'class':'inbox'}),
           'price': forms.TextInput(attrs={'class':'inbox'}),
           'payment': forms.Select(attrs={'class':'inbox'}),
         }
@@ -39,7 +35,6 @@ class AdForm(forms.ModelForm):
         self.fields['delivery'].required = False
         self.fields['price'].required = False
         self.fields['payment'].required = False
-        self.fields['phone'].required = False
         
 class AdImageForm(forms.ModelForm):
   class Meta:
