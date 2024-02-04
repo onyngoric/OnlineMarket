@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, logout, login as user_login
 from django.contrib.auth.decorators import login_required
 from front.forms import AdForm, AdImageForm
 from .models import *
+from django.db.models import Q
 
 # Create your views here.
 
@@ -1521,7 +1522,116 @@ def view(request):
                 chats = AdMessage.objects.filter(adId=ad_id).all()
                 username=request.session['trio_User']
                 return render(request, 'chats.html', {'username':username, 'chats':chats, 'user_id':user_id, 'ad_id':ad_id, 'ad':ad})
-                
+            elif request.POST.get('r1'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(location='Alberta') & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('r2'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(location='British Columbia') & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('r3'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(location='Manitoba') & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('r4'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(location='New Brunswick') & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('r5'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(location='Newfoundland & Labrador') & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('r6'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(location='NorthWest Territories') & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('r7'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(location='Nova Scotia') & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('r8'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(location='Nuna Vut') & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('r9'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(location='Ontario') & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('r10'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(location='Prince Edward Island') & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('r11'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(location='Quebec') & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('r12'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(location='Saskatchewan') & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('r13'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(location='Tukon Territory') & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('p1'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(category=cat).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('p2'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(price__lte=99) & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('p3'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(price__gte=100) | Q(price__lte=199) & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('p4'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(price__gte=200) | Q(price__lte=299) & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('p5'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(price__gte=300) | Q(price__lte=399) & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('p6'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(price__gte=400) | Q(price__lte=499) & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('p7'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(price__gte=500) | Q(price__lte=999) & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('p8'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(price__gte=1000) | Q(price__lte=9999) & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
+            elif request.POST.get('p9'):
+                cat=request.POST.get('ad_categ')
+                ad = Ad.objects.filter(Q(price__gte=10000) & Q(category=cat)).prefetch_related('adimages_set').all()
+                username=request.session['trio_User']
+                return render(request, 'view.html',{'ad':ad,'username':username})
         else:
             username=request.session['trio_User']
             return render(request, 'view.html',{'username':username})
